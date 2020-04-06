@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using cw_3.Models;
+using cw_3.DAL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cw_3.Controllers
@@ -11,7 +12,22 @@ namespace cw_3.Controllers
     [Route("api/students")]
     public class StudentsController : ControllerBase
     {
-        [HttpGet("{id}")]
+        private readonly IDbService _dbService;
+
+        public StudentsController(IDbService dbService)
+        {
+            _dbService = dbService;
+        }
+
+        [HttpGet]
+        public IActionResult GetStudents(string orderBy)
+        {
+            return Ok(_dbService.GetStudents());
+        }
+
+
+        //previous work
+        /*[HttpGet("{id}")]
         public IActionResult GetStudent(int id)
         {
             if (id == 1)
@@ -54,5 +70,6 @@ namespace cw_3.Controllers
 
             return NotFound("Usuwanie nie ukończone");
         }
+        */
     }
 }
