@@ -32,5 +32,27 @@ namespace cw_3.Controllers
             student.IndexNumber = $"s{new Random().Next(1, 20000)}";
             return Ok(student);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult TestPut(int id)
+        {
+            if (id == 1)
+            {
+                return Ok("Aktualizacja dokończona");
+            }
+
+            return NotFound("Aktualizacja nie dokończona");
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult TestDelete(int id)
+        {
+            if (id == 1)
+            {
+                return Ok("Usuwanie ukończone");
+            }
+
+            return NotFound("Usuwanie nie ukończone");
+        }
     }
 }
